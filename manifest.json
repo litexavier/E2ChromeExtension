@@ -6,12 +6,12 @@
   "version": "0.1",
   "content_scripts": [
   {
-	  "matches": ["http://cn.estiah2.com/zh/character/deck"],
+	  "matches": ["http://cn.estiah2.com/zh/character/deck*"],
 	  "css": ["moredeck.css"],
 	  "js": ["jquery-1.10.2.min.js", "moredeck.js"]
   }],
   "permissions": [
 	  "http://cn.estiah2.com/*"
-  ],
+	  ],
   "web_accessible_resources": ["jquery-1.10.2.min.map"]
 }
