@@ -3,12 +3,16 @@
 
   "name": "E2MoreDeck",
   "description": "Can save more decks in estiah2.",
-  "version": "0.1",
+  "version": "0.9",
   "content_scripts": [
   {
 	  "matches": ["http://cn.estiah2.com/zh/character/deck*"],
 	  "css": ["moredeck.css"],
-	  "js": ["jquery-1.10.2.min.js", "moredeck.js"]
+	  "js": ["jquery-1.10.2.min.js", "common.js", "moredeck.js"]
+  },{
+	  "matches": ["http://cn.estiah2.com/zh/world/dungeon/index/id/*"],
+	  "css": ["autodungeon.css"],
+	  "js" : ["jquery-1.10.2.min.js", "common.js", "autodungeon.js"]
   }],
   "permissions": [
 	  "http://cn.estiah2.com/*"
