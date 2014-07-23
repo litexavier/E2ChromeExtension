@@ -96,6 +96,13 @@ function saveDeckToLocal() {
 	dlgtxt = dlgtxt + '<div class="label">牌组名称</div>';
 	dlgtxt = dlgtxt + '<input class="input bd1 c2" id="name" value="">';
 	dlgtxt = dlgtxt + '</div>';
+	dlgtxt = dlgtxt + '<div class="s-text"><div class="category c3">可选卡组</div><div class="deck-name-container">';
+	for(i in localStorage){
+		if(i.slice(0,4) == 'deck') {
+			dlgtxt = dlgtxt + '<div class="c3 dialog-deck-name-list">' + i.slice(5) + '</div>'; 
+		}
+	}
+	dlgtxt = dlgtxt + '</div></div>';
 	dlgtxt = dlgtxt + '<div class="s-buttonset bd2">';
 	dlgtxt = dlgtxt + '<div class="button bd2 opacity modal-dialog-close"><div class="button-inner c3">关闭</div></div>';
 	dlgtxt = dlgtxt + '<div class="button bd1 opacity modal-dialog-ok"><div class="button-inner c2">确定</div></div>';
@@ -106,7 +113,13 @@ function saveDeckToLocal() {
 		localStorage[p] = $.toJSON(getDeckArr());
 		this.close();
 	};
+	s.deckbuttonpress=function(bt) {
+		var p=$(bt).text();
+		this.dlgtext.find('#name').val(p);
+		this.dlgtext.find('#name').text(p);
+	};
 	s.setDlgText(dlgtxt);
+	s.hookAction("click", "dialog-deck-name-list", function(e){return e.data.deckbuttonpress(this);});
 	s.hookAction("click", "modal-dialog-close", function(e){return e.data.close();});
 	s.hookAction("click", "modal-dialog-ok", function(e){return e.data.done();});
 	s.show();
@@ -117,8 +130,15 @@ function loadDeckFromLocal() {
 	dlgtxt = dlgtxt + '<div class="hr bg1"></div>';
 	dlgtxt = dlgtxt + '<div class="s-text">';
 	dlgtxt = dlgtxt + '<div class="label">牌组名称</div>';
-	dlgtxt = dlgtxt + '<input class="input bd1 c2" id="name" value="">';
+	dlgtxt = dlgtxt + '<input class="input bd1 c3" id="name" value="">';
 	dlgtxt = dlgtxt + '</div>';
+	dlgtxt = dlgtxt + '<div class="s-text"><div class="category c3">可选卡组</div><div class="deck-name-container">';
+	for(i in localStorage){
+		if(i.slice(0,4) == 'deck') {
+			dlgtxt = dlgtxt + '<div class="c3 dialog-deck-name-list">' + i.slice(5) + '</div>'; 
+		}
+	}
+	dlgtxt = dlgtxt + '</div></div>';
 	dlgtxt = dlgtxt + '<div class="s-buttonset bd2">';
 	dlgtxt = dlgtxt + '<div class="button bd2 opacity modal-dialog-close"><div class="button-inner c3">关闭</div></div>';
 	dlgtxt = dlgtxt + '<div class="button bd1 opacity modal-dialog-ok"><div class="button-inner c2">确定</div></div>';
@@ -130,7 +150,13 @@ function loadDeckFromLocal() {
 		addCardsByList($.evalJSON(deckstr));
 		this.close();
 	};
+	s.deckbuttonpress=function(bt) {
+		var p=$(bt).text();
+		this.dlgtext.find('#name').val(p);
+		this.dlgtext.find('#name').text(p);
+	};
 	s.setDlgText(dlgtxt);
+	s.hookAction("click", "dialog-deck-name-list", function(e){return e.data.deckbuttonpress(this);});
 	s.hookAction("click", "modal-dialog-close", function(e){return e.data.close();});
 	s.hookAction("click", "modal-dialog-ok", function(e){return e.data.done();});
 	s.show()
